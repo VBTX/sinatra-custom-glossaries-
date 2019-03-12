@@ -15,10 +15,12 @@ class GlossariesController < ApplicationController
 		else
 			redirect '/glossaries/new'
 		end
-
-
 	end
 
+	get '/glossaries/:id' do 
+		@glossary = Glossary.find(params[:id])
+		erb :'glossaries/show'
+	end
 	#show and index routes
 
 end
