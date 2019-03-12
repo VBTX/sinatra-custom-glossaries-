@@ -18,15 +18,25 @@ class GlossariesController < ApplicationController
 	end
 
 	get '/glossaries/:id' do 
-		@glossary = Glossary.find(params[:id])
+		set_glossary
 		erb :'glossaries/show'
 	end
 
-	get "/glossaries/:id/edit" do 
+	get "/glossaries/:id/edit" do
+		set_glossary
 		erb :'glossaries/edit'
 	end
 
+	patch '/glossaries/:id' do 
+		set_glossary
+		@glossary.update(params)
+		redirect 
+	end
 
-#index routes
+	private
+
+	def set_glossary
+		@glossary = Glossary.find(params[:id])
+	end
 
 end
