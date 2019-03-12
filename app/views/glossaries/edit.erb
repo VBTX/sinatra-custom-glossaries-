@@ -1,0 +1,8 @@
+<h2>Edit your glossary title: </h2>
+<form class="" action="/glossaries/<%=@glossary.id%>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<p><label for="title">Glossary title: </label></p>
+	<p><input type="text" name="title" value="<%=@glossary.title%>"></p>
+	<input type="submit" value="Update"></p>
+</form>
+
