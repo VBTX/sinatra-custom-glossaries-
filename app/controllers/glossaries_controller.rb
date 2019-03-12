@@ -21,6 +21,12 @@ class GlossariesController < ApplicationController
 		@glossary = Glossary.find(params[:id])
 		erb :'glossaries/show'
 	end
-	#show and index routes
+
+	get "/glossaries/:id/edit" do 
+		erb :'glossaries/edit'
+	end
+
+
+#index routes
 
 end
