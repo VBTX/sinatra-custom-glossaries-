@@ -1,6 +1,6 @@
 class GlossariesController < ApplicationController
 	get '/glossaries/new' do 
-		erb :glossary
+		erb :'glossaries/new'
 	end
 
 	post '/glossaries' do 
