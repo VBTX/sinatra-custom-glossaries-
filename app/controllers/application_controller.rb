@@ -9,7 +9,11 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "glossaries_rock"
 
   get "/" do
-    erb :welcome
+    if logged_in?
+      redirect "/users/#{@current_user.id}"
+    else
+      erb :welcome
+  end
   end
 
   helpers do 
