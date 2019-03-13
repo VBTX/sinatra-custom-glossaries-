@@ -29,7 +29,7 @@ class GlossariesController < ApplicationController
 	get "/glossaries/:id/edit" do
 		set_glossary
 		if logged_in?
-			if @glossary.user == current_user
+			if authorized_to_edit?(@glossary)
 				erb :'glossaries/edit'
 			else
 				redirect "users/#{current_user.id}"
@@ -43,7 +43,7 @@ class GlossariesController < ApplicationController
 	patch '/glossaries/:id' do 
 		set_glossary
 		if logged_in?
-			if @glossary.user == current_user
+			if authorized_to_edit?(@glossary)
 				@glossary.update(title: params[:params])
 				redirect "/glossaries/#{@glossary.id}"
 			else
