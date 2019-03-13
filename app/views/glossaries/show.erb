@@ -1,3 +1,5 @@
 <h3><%=@glossary.title%></h3>
+<% if authorized_to_edit?(@glossary)%>
 <a href="glossaries/<%=@glossary.id%>/edit">Edit title</a>
 <a href="glossaries/<%=@glossary.id%>/delete">Delete this glossary</a>
+<%end%> 
