@@ -8,13 +8,17 @@ class GlossariesController < ApplicationController
 			redirect '/'
 		end
 
-
 		if params[:content] != ""
 			@glossary = Glossary.create(title: params[:title], user_id: current_user.id)
 			redirect "/glossaries/#{@glossary.id}"
 		else
 			redirect '/glossaries/new'
 		end
+	end
+
+	get '/glossaries' do 
+		@glossaries = Glossary.all
+		erb :'glossaries/index'
 	end
 
 	get '/glossaries/:id' do 
