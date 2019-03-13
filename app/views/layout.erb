@@ -15,9 +15,12 @@
   </head>
   <body>
     <div class="nav">
-      <a href="/logout">Log Out</a>
-      <a href="/glossaries">Glossaries</a>
-      <a href="/glossaries/new">Add New Glossary</a>
+      <% if logged_in? %>
+        <a href="/logout">Log Out</a>
+        <a href="/glossaries">Glossaries</a>
+        <a href="/glossaries/new">Add New Glossary</a>
+      <%end%>
+    </div>
     <div class="wrapper">
 
         <%= yield %>
