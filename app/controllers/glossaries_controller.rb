@@ -43,7 +43,7 @@ class GlossariesController < ApplicationController
 	patch '/glossaries/:id' do 
 		set_glossary
 		if logged_in?
-			if authorized_to_edit?(@glossary)
+			if authorized_to_edit?(@glossary) && params[:content] != ""
 				@glossary.update(title: params[:params])
 				redirect "/glossaries/#{@glossary.id}"
 			else
