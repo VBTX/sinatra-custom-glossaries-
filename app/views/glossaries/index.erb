@@ -1,1 +1,7 @@
-INDEX
+
+<h2>Here are your glossaries:</h2>
+<% @glossaries.each do |glossary|%>
+<ul>
+<h4><li><a href="/glossaries/<%=glossary.id%>"><%= glossary.title %></a></li></h4>
+</ul>
+<%end%>
