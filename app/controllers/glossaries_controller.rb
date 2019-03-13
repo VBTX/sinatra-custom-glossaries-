@@ -47,11 +47,22 @@ class GlossariesController < ApplicationController
 				@glossary.update(title: params[:params])
 				redirect "/glossaries/#{@glossary.id}"
 			else
-				redirect "users/#{current_user.id}"
+				redirect "/users/#{current_user.id}"
 			end
 		else
 			redirect '/'
 		end
+	end
+
+	delete '/glossaries/:id' do 
+		set_glossary
+		if authorized_to_edit?(@glossary)
+			@glossary.destroy
+			redirect "/glossaries"
+
+		else
+			redirect "/glossaries"
+
 	end
 
 	private
