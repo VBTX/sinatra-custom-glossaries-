@@ -24,13 +24,30 @@ class GlossariesController < ApplicationController
 
 	get "/glossaries/:id/edit" do
 		set_glossary
-		erb :'glossaries/edit'
+		if logged_in?
+			if @glossary.user == current_user
+				erb :'glossaries/edit'
+			else
+				redirect "users/#{current_user.id}"
+			end
+		else
+			redirect '/'
+
+		end
 	end
 
 	patch '/glossaries/:id' do 
 		set_glossary
-		@glossary.update(params)
-		redirect 
+		if logged_in?
+			if @glossary.user == current_user
+				@glossary.update(title: params[:params])
+				redirect "/glossaries/#{@glossary.id}"
+			else
+				redirect "users/#{current_user.id}"
+			end
+		else
+			redirect '/'
+		end
 	end
 
 	private
@@ -38,5 +55,7 @@ class GlossariesController < ApplicationController
 	def set_glossary
 		@glossary = Glossary.find(params[:id])
 	end
+
+
 
 end
