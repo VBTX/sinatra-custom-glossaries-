@@ -1,5 +1,9 @@
 <h3><%=@glossary.title%></h3>
 <% if authorized_to_edit?(@glossary)%>
 <a href="glossaries/<%=@glossary.id%>/edit">Edit title</a>
-<a href="glossaries/<%=@glossary.id%>/delete">Delete this glossary</a>
+<br></br>
+<form class="" action="glossaries/<%=@glossary.id%>" method="post">
+	<input type="hidden" name="_method" value="delete">
+	<input type="submit" name="" value="Delete this glossary">
+</form>
 <%end%> 
