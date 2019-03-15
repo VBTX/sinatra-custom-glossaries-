@@ -11,9 +11,8 @@ class UsersController < ApplicationController
 			redirect "/users/#{@user.id}"
 
 		else
-
-			puts "Your login information is incorrect"
-			puts "If you don't have an account, please signup here:"
+			flash[:message] = "Your credentials are incorrect. Please sign up or try again."
+			redirect '/login'
 
 		end
 	end
