@@ -9,11 +9,11 @@ class GlossariesController < ApplicationController
 		end
 
 		if params[:title] != ""
-			flash[:message] = "Glossary title was successfully added."
+			flash[:error] = "Glossary title was successfully added."
 			@glossary = Glossary.create(title: params[:title], user_id: current_user.id)
 			redirect "/glossaries/#{@glossary.id}"
 		else
-			flash[:message] = "Please enter a title"
+			flash[:error] = "Please enter a title"
 			redirect '/glossaries/new'
 		end
 	end
@@ -25,6 +25,7 @@ class GlossariesController < ApplicationController
 
 	get '/glossaries/:id' do 
 		set_glossary
+		
 		erb :'glossaries/show'
 	end
 
