@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
 	post '/users' do 
 		@user = User.new(params)
-		if @user.save
+		if @user.save 
 			session[:user_id] = @user.id
 			flash[:message] = "You have successfully created an account!"
 			redirect '/users/#{@user.id}'
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
 
 	get '/users/:id' do
 		@user = User.find_by(id: params[:id])
+		redirect_if_not_logged_in
 		erb :'/users/show'
 	end
 end
