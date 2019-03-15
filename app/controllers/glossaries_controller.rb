@@ -4,10 +4,7 @@ class GlossariesController < ApplicationController
 	end
 
 	post '/glossaries' do
-		if !logged_in?
-			redirect '/'
-		end
-
+		redirect_if_not_logged_in
 		if params[:title] != ""
 			flash[:error] = "Glossary title was successfully added."
 			@glossary = Glossary.create(title: params[:title], user_id: current_user.id)
@@ -31,36 +28,30 @@ class GlossariesController < ApplicationController
 
 	get "/glossaries/:id/edit" do
 		set_glossary
-		if logged_in?
+		redirect_if_not_logged_in
 			if authorized_to_edit?(@glossary)
 				erb :'glossaries/edit'
 			else
 				redirect "users/#{current_user.id}"
 			end
-		else
-			redirect '/'
-
-		end
 	end
 
 	patch '/glossaries/:id' do 
 		set_glossary
-		if logged_in?
+		redirect_if_not_logged_in
 			if authorized_to_edit?(@glossary) && params[:title] != ""
 				@glossary.update(title: params[:params])
 				redirect "/glossaries/#{@glossary.id}"
 			else
-				redirect "/users/#{current_user.id}"
+				redirect "users/#{current_user.id}"
 			end
-		else
-			redirect '/'
-		end
 	end
 
 	delete '/glossaries/:id' do 
 		set_glossary
 		if authorized_to_edit?(@glossary)
 			@glossary.destroy
+			flash[:message] = "Your glossary was successfully deleted."
 			redirect "/glossaries"
 
 		else
