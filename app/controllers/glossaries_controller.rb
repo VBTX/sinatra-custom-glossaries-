@@ -8,10 +8,12 @@ class GlossariesController < ApplicationController
 			redirect '/'
 		end
 
-		if params[:content] != ""
+		if params[:title] != ""
+			flash[:message] = "Glossary title was successfully added."
 			@glossary = Glossary.create(title: params[:title], user_id: current_user.id)
 			redirect "/glossaries/#{@glossary.id}"
 		else
+			flash[:message] = "Please enter a title"
 			redirect '/glossaries/new'
 		end
 	end
@@ -43,7 +45,7 @@ class GlossariesController < ApplicationController
 	patch '/glossaries/:id' do 
 		set_glossary
 		if logged_in?
-			if authorized_to_edit?(@glossary) && params[:content] != ""
+			if authorized_to_edit?(@glossary) && params[:title] != ""
 				@glossary.update(title: params[:params])
 				redirect "/glossaries/#{@glossary.id}"
 			else
