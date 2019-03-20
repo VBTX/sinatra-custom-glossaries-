@@ -1,6 +1,7 @@
 class GlossariesController < ApplicationController
 
 	get '/glossaries/new' do 
+		redirect_if_not_logged_in
 		erb :'glossaries/new'
 	end
 
@@ -18,6 +19,7 @@ class GlossariesController < ApplicationController
 	end
 
 	get '/glossaries' do 
+		redirect_if_not_logged_in
 		@glossaries = Glossary.all
 		erb :'glossaries/index'
 	end
