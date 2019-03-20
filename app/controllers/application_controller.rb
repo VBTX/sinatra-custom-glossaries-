@@ -7,7 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable  :sessions
     set :session_secret, "glossaries_rock"
-    register 'Sinatra::Flash'
+    register Sinatra::Flash
 
   get "/" do
     if logged_in?
@@ -33,7 +33,6 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_logged_in
-
       if !logged_in?
         flash[:error] = "You must be logged in to view the page."
         redirect '/'
