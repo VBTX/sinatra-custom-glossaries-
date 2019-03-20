@@ -7,4 +7,4 @@ class EntriesController < ApplicationController
 end
 
 
-HOW DO WE DO THOSE ENTRIES IN A GLOSSARY?
+#HOW DO WE DO THOSE ENTRIES IN A GLOSSARY?
