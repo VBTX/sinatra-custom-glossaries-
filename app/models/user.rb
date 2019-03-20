@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
 	validates :email, uniqueness: true
 	has_many :glossaries
 	has_many :entries, through: :glossaries
+
+	@glossaries = []
 end
