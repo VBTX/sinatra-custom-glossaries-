@@ -1,4 +1,5 @@
 class GlossariesController < ApplicationController
+
 	get '/glossaries/new' do 
 		erb :'glossaries/new'
 	end
@@ -8,6 +9,7 @@ class GlossariesController < ApplicationController
 		if params[:title] != ""
 			flash[:error] = "Glossary title was successfully added."
 			@glossary = Glossary.create(title: params[:title], user_id: current_user.id)
+			@glossaries << @glossary
 			redirect "/glossaries/#{@glossary.id}"
 		else
 			flash[:error] = "Please enter a title"
@@ -22,7 +24,6 @@ class GlossariesController < ApplicationController
 
 	get '/glossaries/:id' do 
 		set_glossary
-		
 		erb :'glossaries/show'
 	end
 
@@ -56,7 +57,7 @@ class GlossariesController < ApplicationController
 
 		else
 			redirect "/glossaries"
-
+		end
 	end
 
 	private
@@ -64,7 +65,4 @@ class GlossariesController < ApplicationController
 	def set_glossary
 		@glossary = Glossary.find(params[:id])
 	end
-
-
-
 end
