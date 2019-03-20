@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-use UsersController
 use GlossariesController
 use EntriesController
+use UsersController
 run ApplicationController
