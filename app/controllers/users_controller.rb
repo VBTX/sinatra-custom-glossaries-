@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 		else
 			flash[:error] = "Your credentials are incorrect. Please sign up or try again."
 			redirect '/login'
-
 		end
 	end
 
